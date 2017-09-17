@@ -56,7 +56,8 @@ body {
 
 .content .text {
   margin-right: 5rem;
-  white-space: nowrap;
+  height: 3.3rem !important;
+  white-space: normal;
   word-break: break-all;
   text-overflow: ellipsis;
   overflow: hidden;
