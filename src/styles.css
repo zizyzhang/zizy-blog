@@ -34,6 +34,9 @@ body {
   height: 100px;
 
 }
+.content .list-group-item-expand{
+  height:auto !important;
+}
 
 .content .img {
   float: left;
@@ -45,6 +48,15 @@ body {
 
 }
 
+.content .img-expand {
+  float: none;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 100%;
+  max-width: 350px;
+  margin: auto;
+
+}
 .content .title {
   font-weight: 900;
   margin-right: 5rem;
@@ -56,11 +68,16 @@ body {
 
 .content .text {
   margin-right: 5rem;
-  height: 3.3rem !important;
+  height: 3.3rem ;
   white-space: normal;
   word-break: break-all;
   text-overflow: ellipsis;
   overflow: hidden;
+}
+.text-expand{
+  overflow: hidden;
+  height: auto !important;
+
 }
 
 .content .month {
