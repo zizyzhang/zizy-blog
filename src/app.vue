@@ -585,7 +585,7 @@
           },
           {
             img_url: 'http://owdi2r4ca.bkt.clouddn.com/f5c48195e926a5d41ab14f2b440bee81.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
-            title: '办了iang，吃了点心然后晚上和网红小姐姐上课的一天\n\n',
+            title: '办了iang，吃了点心然后晚上上课的一天\n\n',
             content: '\n哎中午吃了铁板饭感觉算是这里为数不多好吃的东西了。\n然后下午就一起去办证。\n嗯感觉莫名的有点紧张不知道为什么。\n反正还是那样的不回消息就…\n点心好吃啊。\n晚上上课还是很开心的。',
             date: '2017-09-07T12:25:32Z',
             id: '389B64F638FB4BDBA0158252106F988C',
@@ -659,6 +659,7 @@
       expand: function (id) {
         $('#' + id).toggleClass('list-group-item-expand')
         $('#' + id).children('.text').toggleClass('text-expand');
+        $('#' + id).children('.title').toggleClass('title-expand');
         $('#' + id).children('.img').toggleClass('img-expand');
         if ($('#' + id).children('.img').hasClass('img-expand') ){
           $('#' + id).children('.img').height($('#' + id).children('.img').width());

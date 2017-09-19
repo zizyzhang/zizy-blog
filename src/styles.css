@@ -65,7 +65,9 @@ body {
   text-overflow: ellipsis;
   overflow: hidden;
 }
-
+.content .title-expand {
+   white-space: normal!important;
+ }
 .content .text {
   margin-right: 5rem;
   height: 3.3rem ;
