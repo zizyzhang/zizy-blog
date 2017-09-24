@@ -8,10 +8,10 @@
     "build": "rm -rf build/* && webpack --progress --hide-modules --config webpack.production.js --watch"
   },
   "dependencies": {
-    "vue": "^1.0.8"
+    "vue": "^2.0.0"
   },
   "devDependencies": {
-    "vue-loader": "^7.0.3",
+    "vue-loader": "^9.0.0",
     "vue-hot-reload-api": "^1.2.0",
     "vue-html-loader": "^1.0.0",
     "style-loader": "^0.13.0",

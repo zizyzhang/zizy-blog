@@ -10,15 +10,24 @@
     </div>
     <div class="content">
       <ul class="list-group">
-        <li id="{{article.id}}" class="list-group-item list-group-item-action"
-            :class="{'list-group-item-expand':isExpand}"
-            @click="expand(article.id)" v-for="article in articles">
-          <div v-if="!!article.img_url" class="img" :class="{'img-expand':isExpand}"
-               :style="{'background-image': 'url(' + article.img_url + ')'}"></div>
-          <div class="title">{{article.title}}</div>
-          <div class="text" :class="{'text-expand':isExpand}">{{article.content}}</div>
-          <div class="month">{{new Date(article.date).getMonth()+1}}月</div>
-          <div class="day">{{new Date(article.date).getDate()}}</div>
+
+        <li
+          v-for="(article, index) of articles">
+          <div class="year"
+               v-if="index == 0 || new Date(articles[index-1].date).getYear()!=new Date(article.date).getYear()">{{new
+            Date(article.date).getYear()+1900}}年
+          </div>
+          <div :id="article.id" class="list-group-item list-group-item-action"
+               :class="{'list-group-item-expand':isExpand}"
+               @click="expand(article.id)">
+            <div v-if="!!article.img_url" class="img" :class="{'img-expand':isExpand}"
+                 :style="{'background-image': 'url(' + article.img_url + ')'}"></div>
+            <div class="title">{{article.title}}</div>
+            <div class="text" :class="{'text-expand':isExpand}">{{article.content}}</div>
+            <div class="month">{{new Date(article.date).getMonth()+1}}月</div>
+            <div class="day">{{new Date(article.date).getDate()}}</div>
+          </div>
+
         </li>
       </ul>
     </div>
@@ -30,7 +39,6 @@
 <script>
   export default {
 
-    replace: false,
     data() {
       return {
         articles: this.getArticles().sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()),
@@ -654,42 +662,81 @@
             date: '2017-09-15T03:40:13Z',
             id: '40AF3E8624A34F9387651461ECA7493E',
             place: '香港皇后大道西470号'
-          },{ img_url: 'http://owdi2r4ca.bkt.clouddn.com/2a62a0c36e32a74bf619f8bbc96ebbd3.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
+          }, {
+            img_url: 'http://owdi2r4ca.bkt.clouddn.com/2a62a0c36e32a74bf619f8bbc96ebbd3.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
             title: '今天是自学、女租客看房、苦瓜好难吃、煎鱼又失败的一天！\n\n',
             content: '\n其实好像都如题了。\n吃了素食感觉好像都没变化啊有点悲伤\n公司可能又要推一星期弄好了！\n不知道为什么煎鱼还是不成功😩\n气死了真的是，非常，生气了',
             date: '2017-09-15T16:16:05Z',
             id: 'D5782561F5064DD29E8B6F3C7298EF71',
-            place: '香港皇后大道西470号' },
-          { img_url: 'http://owdi2r4ca.bkt.clouddn.com/ac085adbf1b44eec59e6795ad8d59f6a.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
+            place: '香港皇后大道西470号'
+          },
+          {
+            img_url: 'http://owdi2r4ca.bkt.clouddn.com/ac085adbf1b44eec59e6795ad8d59f6a.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
             title: '可以说是很长很长很开心的一天了\n\n',
             content: '\nsocial程度和幸福感成正比搞不好这句话没有错也不一定。\n今天一起吃了火锅！\n虽然味道只是算普通但是这种感觉真的是很棒啊！\n可能在香港的生活就快慢慢适应了吧，\n总觉得开始的日子都很难过。\n然后就慢慢变得好起来\n晚上本来很不想去的爬山\n认识了很多人阿真的是！\n本来以为自己会很尬\n不过似乎也就还好的样子。\n毕竟灯那么黑，反正不知道是谁🌚',
             date: '2017-09-16T16:20:13Z',
             id: '9AB60684036647489B579E6F1F1BB53A',
-            place: '香港皇后大道西470号' },
-          { img_url: 'http://owdi2r4ca.bkt.clouddn.com/1b5aeaf76eb938afe7231cb4370f2f60.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
+            place: '香港皇后大道西470号'
+          },
+          {
+            img_url: 'http://owdi2r4ca.bkt.clouddn.com/1b5aeaf76eb938afe7231cb4370f2f60.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
             title: '终于煎鱼成功了！！！的一天\n\n',
             content: '\n早上很早睡醒，\n下午在智华觉得，还是说自学好听一点\n一粥面的皮蛋粥完全是白粥啊差评。\n晚上煎了人生第一条完整煎鱼。\n一下午在吵架不知道在吵什么……\n琢磨不透的感情\n',
             date: '2017-09-17T16:14:15Z',
             id: '759385B74544465C978A54FA5B6846DF',
-            place: '香港皇后大道西476号' },
-          { img_url: 'http://owdi2r4ca.bkt.clouddn.com/0816964229125f67cf6230402a36ab55.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
+            place: '香港皇后大道西476号'
+          },
+          {
+            img_url: 'http://owdi2r4ca.bkt.clouddn.com/0816964229125f67cf6230402a36ab55.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
             title: '发生了诡异事情的一天\n\n',
             content: '\n中午吃了一粥面的捞面+云吞觉得又踩雷\n下午开始新的一轮吵架\n然后思考了很多之前都没考虑过的问题。\n虽然平复下来觉得一切都可以接受。\n但始终自己做不出什么好的选择。\n感情总归是一件特别特别特别烦人的事情阿！\n只是有时候总觉得这样某种意义上的成长，可能并不见得是一件好事。\n但是世界上就是有些东西，可以很简单的从A到达B，反之就很难。',
             date: '2017-09-18T17:00:16Z',
             id: 'AD4BBFB34CB04284940FD330D419357F',
-            place: '香港皇后大道西470号' }  ]
+            place: '香港皇后大道西470号'
+          }, {
+            img_url: 'http://owdi2r4ca.bkt.clouddn.com/3a00bc9b70f528e2ebc07e269e015eed.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
+            title: '上课巨无聊怀疑自己进了假学校的一天\n\n',
+            content: '\n都是一些学过的东西反正感觉听不听课也都无所谓。\n不好吃的草莓。\n开心的事情是吃了关爱**儿童的爱心便当。\n晚上在自学，但是没有什么心情静下来好好看书。还是打游戏好了😫。\n',
+            date: '2017-09-19T16:09:18Z',
+            id: 'B5599B5B0C894630AF1E5F45318CDC09',
+            place: '香港皇后大道西470号'
+          },
+          {
+            img_url: 'http://owdi2r4ca.bkt.clouddn.com/f339c312aa8e7766dfbcba6f9ed9a2bd.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
+            title: '和爬山认识的新同学吃饭学习的一天\n\n',
+            content: '\n虽然开始的时候还是很尴尬：）\n外加似乎南北的口味不太一样啊？？？\n不过还好只有普通尴尬程度而已。\n看神经网络的第二课学的有点抑郁\n看不下去书的感觉。\n可能还是觉得太抽象吧？？？\n晚餐的su餐厅非常好评。\n还是开心的一天阿。',
+            date: '2017-09-20T16:11:26Z',
+            id: '10E83A023AB1416BA983E4E0EF185BD2',
+            place: '香港皇后大道西470号'
+          },
+          {
+            img_url: 'http://owdi2r4ca.bkt.clouddn.com/c88d121671a2565c27d4e7f50cf55413.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
+            title: '深圳公司审查外加海底捞的一天！\n\n',
+            content: '\n实际上是两个智障先记错了地铁站然后走错口岸外加走错地铁站n次的一天哈哈哈哈哈。至少公司一切顺利，外加海底捞还是很棒的啊。逛超市日常没耐心。不知道有什么那么好逛：）。还是买了一些有的没的。喝了奇怪的皇茶，并没有心心念念的火龙果。但觉得还是很长很开心的一天。',
+            date: '2017-09-21T16:18:41Z',
+            id: 'B3DB542F504C43D38A5E30FDE0401CA2',
+            place: '香港皇后大道西470号'
+          },
+          {
+            img_url: 'http://owdi2r4ca.bkt.clouddn.com/fa8d633bee57409c41bdeab75cce179a.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
+            title: '和房东谈完后开始颓废各种找吃的一天\n\n',
+            content: '\n可能不好的情绪在一个人的时候才会累积起来。\n虽然可能之后还是要搬家，不过把这一切都当作并非应得的话。可能也没有那么难过了。\n总算找个一个可能还不错的新家，希望一切都好。\n吃东西实在是一个很容易让人冷加下来的事情阿？',
+            date: '2017-09-22T16:34:48Z',
+            id: '7916C2CD8C6848B2B6FA96F2DE949615',
+            place: '香港皇后大道西470号'
+          }]
       },
       expand: function (id) {
         $('#' + id).toggleClass('list-group-item-expand')
         $('#' + id).children('.text').toggleClass('text-expand');
         $('#' + id).children('.title').toggleClass('title-expand');
         $('#' + id).children('.img').toggleClass('img-expand');
-        if ($('#' + id).children('.img').hasClass('img-expand') ){
+        if ($('#' + id).children('.img').hasClass('img-expand')) {
           $('#' + id).children('.img').height($('#' + id).children('.img').width());
-          $('#' + id).children('.day,.month').css('padding-top',$('#' + id).children('.img').height());
-        }else{
+          $('#' + id).children('.day,.month').css('padding-top', $('#' + id).children('.img').height());
+        } else {
           $('#' + id).children('.img').height('80px');
-          $('#' + id).children('.day,.month').css('padding-top','0px');
+          $('#' + id).children('.day,.month').css('padding-top', '0px');
 
         }
 
