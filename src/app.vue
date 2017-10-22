@@ -8,13 +8,14 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item active">
-            <a class="nav-link" href="#">生活 <span class="sr-only">(current)</span></a>
+            <router-link to="/" class="nav-link">生活</router-link>
+
           </li>
+          <!--<li class="nav-item">-->
+            <!--<a class="nav-link" href="#">想法</a>-->
+          <!--</li>-->
           <li class="nav-item">
-            <a class="nav-link" href="#">想法</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">关于</a>
+            <router-link to="/about" class="nav-link">关于</router-link>
           </li>
         </ul>
       </div>
