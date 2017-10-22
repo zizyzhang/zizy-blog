@@ -46,6 +46,7 @@
   img{
     margin:auto;
     width:410px;
-    /*height:622px;*/
+    max-width: 100%;
+
   }
 </style>
