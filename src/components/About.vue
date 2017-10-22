@@ -5,7 +5,7 @@
       </div>
       <h1>About Zizy</h1>
     </div>
-    <img src="../assets/zizy.png" alt="">
+    <img src="../assets/zizy.jpg" alt="">
 
   </div>
 
