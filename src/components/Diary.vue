@@ -912,6 +912,10 @@
     padding: 5px !important;
   }
 
+  .list-group li{
+    margin-top: 0.5rem;
+  }
+
   .avatar {
     background: url("http://owdi2r4ca.bkt.clouddn.com/avatar.jpg");
     width: 100px;

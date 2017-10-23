@@ -7,15 +7,15 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-          <li class="nav-item active">
-            <router-link to="/" class="nav-link">生活</router-link>
+          <li class="nav-item ">
+            <router-link to="/diary"  class="nav-link nav-diary" name="diary">日记</router-link>
 
           </li>
           <!--<li class="nav-item">-->
             <!--<a class="nav-link" href="#">想法</a>-->
           <!--</li>-->
           <li class="nav-item">
-            <router-link to="/about" class="nav-link">关于</router-link>
+            <router-link to="/about" class="nav-link nav-about" name="about">关于</router-link>
           </li>
         </ul>
       </div>
@@ -26,7 +26,7 @@
 
 <script>
 export default {
-  name: 'app'
+  name: 'app',
 }
 </script>
 
@@ -40,9 +40,16 @@ export default {
 
   /* Space out content a bit */
   body {
-    padding-bottom: 20px;
+    /*padding-bottom: 20px;*/
   }
 
+  #app{
+
+  }
+
+  .router-link-active{
+    color: rgba(0, 0, 0, .9) !important;
+  }
 
 
 </style>
