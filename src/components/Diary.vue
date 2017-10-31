@@ -7,6 +7,7 @@
       <div class="avatar">
       </div>
       <h1>Zizy's life</h1>
+      <div>---每周一更新---</div>
     </div>
     <div class="content ">
       <ul class="list-group">
@@ -979,7 +980,7 @@
 
   }
 
-  .header h1 {
+  .header  {
     text-align: center;
 
   }
