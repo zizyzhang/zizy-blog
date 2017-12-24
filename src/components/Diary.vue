@@ -48,7 +48,7 @@
     },
     methods: {
       getArticles: function () {
-        return [{ img_url: 'http://owdi2r4ca.bkt.clouddn.com/60459929c57adf4729ec4dcc52833967.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
+        return [ { img_url: 'http://owdi2r4ca.bkt.clouddn.com/60459929c57adf4729ec4dcc52833967.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
           title: 'multimedia考试和pizza的一天\n\n',
           content: '\n心情3分。早起复习。整理了好几天的小抄最后考试好像还是有点不按套路，不开心，不会好了！\n还好pizza很好吃。开心了一点点点。',
           date: '2017-12-16T06:48:53Z',
@@ -137,7 +137,7 @@
             date: '2017-12-14T17:07:01Z',
             id: '6CE4F2FCB6B14268B714CA127863A3DD',
             place: 'The University of Hong Kong' },
-            ,{ img_url: 'http://owdi2r4ca.bkt.clouddn.com/86b49a10daa21f55395fc9bfdd9c8167.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
+          { img_url: 'http://owdi2r4ca.bkt.clouddn.com/86b49a10daa21f55395fc9bfdd9c8167.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
           title: '写作业的一星期\n\n',
           content: '\n心情3分。每天写作业到凌晨快要天亮。\n智华和dental，\nUCC咖啡和Coke Zero，\n夜宵和剧，\nmultimediaumlapp和security，\n黑眼圈，\n写出来作业的开心和写不出的悲伤。\n',
           date: '2017-12-05T17:31:46Z',
