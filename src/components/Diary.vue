@@ -16,7 +16,7 @@
           v-for="(article, index) of articles">
           <div class="year"
                v-if="index == 0 || new Date(articles[index-1].date).getYear()!=new Date(article.date).getYear()">{{new
-            Date(article.date).getUTCYear()+1900}}年
+            Date(article.date).getYear()+1900}}年
           </div>
           <div :id="article.id" class="list-group-item list-group-item-action"
                :class="{'list-group-item-expand':isExpand}"

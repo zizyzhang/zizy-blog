@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1f9eacaf-86b2-4b57-90bf-fa4dcc4a93e0" name="Default" comment="" />
+    <list default="true" id="1f9eacaf-86b2-4b57-90bf-fa4dcc4a93e0" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Diary.vue" afterPath="$PROJECT_DIR$/src/components/Diary.vue" />
+    </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -34,8 +36,8 @@
       <file leaf-file-name="Diary.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/Diary.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="170" column="39" lean-forward="true" selection-start-line="170" selection-start-column="39" selection-end-line="170" selection-end-column="39" />
+            <state relative-caret-position="210">
+              <caret line="20" column="64" lean-forward="false" selection-start-line="20" selection-start-column="64" selection-end-line="20" selection-end-column="64" />
               <folding />
             </state>
           </provider>
@@ -384,7 +386,7 @@
       <workItem from="1514367563503" duration="5137000" />
       <workItem from="1515464553969" duration="517000" />
       <workItem from="1515496234112" duration="5000" />
-      <workItem from="1515496247737" duration="2565000" />
+      <workItem from="1515496247737" duration="2604000" />
     </task>
     <task id="LOCAL-00003" summary="update 10.18">
       <created>1508337317784</created>
@@ -397,7 +399,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="72225000" />
+    <option name="totallyTimeSpent" value="72264000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="811" extended-state="0" />
@@ -877,8 +879,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Diary.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="170" column="39" lean-forward="true" selection-start-line="170" selection-start-column="39" selection-end-line="170" selection-end-column="39" />
+        <state relative-caret-position="210">
+          <caret line="20" column="64" lean-forward="false" selection-start-line="20" selection-start-column="64" selection-end-line="20" selection-end-column="64" />
           <folding />
         </state>
       </provider>
