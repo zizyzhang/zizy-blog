@@ -16,7 +16,7 @@
           v-for="(article, index) of articles">
           <div class="year"
                v-if="index == 0 || new Date(articles[index-1].date).getYear()!=new Date(article.date).getYear()">{{new
-            Date(article.date).getYear()+1900}}年
+            Date(article.date).getUTFYear()+1900}}年
           </div>
           <div :id="article.id" class="list-group-item list-group-item-action"
                :class="{'list-group-item-expand':isExpand}"
@@ -25,8 +25,8 @@
                  :style="{'background-image': 'url(' + article.img_url + ')'}"></div>
             <div class="title">{{article.title}}</div>
             <div class="text" :class="{'text-expand':isExpand}">{{article.content}}</div>
-            <div class="month">{{new Date(article.date).getMonth()+1}}月</div>
-            <div class="day">{{new Date(article.date).getDate()}}</div>
+            <div class="month">{{new Date(article.date).getUTFMonth()+1}}月</div>
+            <div class="day">{{new Date(article.date).getUTFDate()}}</div>
           </div>
 
         </li>
@@ -164,7 +164,7 @@
             img_url: 'http://owdi2r4ca.bkt.clouddn.com/8c668a0682057182d00e62a815814de2.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
             title: '印尼街头闲逛找到正常餐厅的一天\n\n',
             content: '\n心情3分。今天的餐厅没有太踩雷。\n睡了很久很久才可以有一点点恢复起来。\n晚上咖啡厅。感觉很多事要赶紧开始了才是。',
-            date: '2018-01-31T16:14:36Z',
+            date: '2018-01-01T16:14:36Z',
             id: '77B02CBB4642485B87CA8FC5A92DD975',
             place: 'Jalan Affandi'
           }, {
