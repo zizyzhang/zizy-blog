@@ -16,7 +16,7 @@
           v-for="(article, index) of articles">
           <div class="year"
                v-if="index == 0 || new Date(articles[index-1].date).getYear()!=new Date(article.date).getYear()">{{new
-            Date(article.date).getUTFYear()+1900}}年
+            Date(article.date).getUTCYear()+1900}}年
           </div>
           <div :id="article.id" class="list-group-item list-group-item-action"
                :class="{'list-group-item-expand':isExpand}"
@@ -25,8 +25,8 @@
                  :style="{'background-image': 'url(' + article.img_url + ')'}"></div>
             <div class="title">{{article.title}}</div>
             <div class="text" :class="{'text-expand':isExpand}">{{article.content}}</div>
-            <div class="month">{{new Date(article.date).getUTFMonth()+1}}月</div>
-            <div class="day">{{new Date(article.date).getUTFDate()}}</div>
+            <div class="month">{{new Date(article.date).getUTCMonth()+1}}月</div>
+            <div class="day">{{new Date(article.date).getUTCDate()}}</div>
           </div>
 
         </li>
