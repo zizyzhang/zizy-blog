@@ -91,8 +91,8 @@
       <file leaf-file-name="About.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/About.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="148">
-              <caret line="40" column="2" lean-forward="true" selection-start-line="40" selection-start-column="2" selection-end-line="40" selection-end-column="2" />
+            <state relative-caret-position="193">
+              <caret line="29" column="5" lean-forward="false" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -431,7 +431,7 @@
       <workItem from="1521904932718" duration="107000" />
       <workItem from="1521905417306" duration="63000" />
       <workItem from="1521905506584" duration="12000" />
-      <workItem from="1522917083320" duration="17955000" />
+      <workItem from="1522917083320" duration="18284000" />
     </task>
     <task id="LOCAL-00003" summary="update 10.18">
       <created>1508337317784</created>
@@ -444,7 +444,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="111362000" />
+    <option name="totallyTimeSpent" value="111691000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1439" height="813" extended-state="6" />
@@ -861,8 +861,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/About.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="40" column="2" lean-forward="true" selection-start-line="40" selection-start-column="2" selection-end-line="40" selection-end-column="2" />
+        <state relative-caret-position="193">
+          <caret line="29" column="5" lean-forward="false" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
           <folding />
         </state>
       </provider>
