@@ -9,7 +9,7 @@
       <h1>Zizy's life</h1>
       <div>---每周一更新---</div>
     </div>
-    <div v-if="articles.length===0">加载中，请稍后...</div>
+    <div v-if="articles.length===0" class="loading">加载中，请稍后...</div>
     <div id="diaryList" class="content ">
       <ul class="list-group">
 
@@ -115,6 +115,11 @@
     margin: auto;
     border-radius: 10px;
 
+  }
+  .loading{
+    text-align: center;
+    margin: 4rem;
+    font-size: 1.5rem
   }
 
   .header {
