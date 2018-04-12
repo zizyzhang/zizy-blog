@@ -38,8 +38,7 @@
 
 **叔叔不约匿名聊天网 - 随机1对1匿名聊天平台 (WEB)	**
 
--  独立开发前端及后端程序(Node.js+MongoDB+SQLite+Vue.js+SUI等)
--  部分网站数据(数据来源为GoogleAnalytics)
+- 独立开发前端及后端程序(Node.js+MongoDB+SQLite+Vue.js+SUI等)
 - 近期平均IP：3.5万/每日 （2018年4月）
 - 从2016年4月开始**持续盈利**，会员平均复购率在**45%**以上
 - 网址:
