@@ -35,6 +35,7 @@ fs.readFile('/Users/Zizy/Downloads/diary/Journal.json', async function (err, dat
     .insertMany(structured,{ordered:false})
     .catch(e=>console.error(e.message));
   console.log('import ok')
+  process.exit(0);
 });
 
 async function addPosts(){

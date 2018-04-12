@@ -18,28 +18,40 @@ var formUploader = new qiniu.form_up.FormUploader(config);
 var putExtra = new qiniu.form_up.PutExtra();
 // var key = 'logo.png';
 
+var images = require('images');
+
 
 var execFile = require('child_process').execFile;
-execFile('find', ['/Users/Zizy/Downloads/diary/photos'], function (err, stdout, stderr) {
+execFile('find', ['/Users/Zizy/Downloads/diary/photos'], function (err, stdout, stderr){
   var file_list = stdout.split('\n').filter(f => f.substr(f.length - 3) === 'peg');
-  console.log(file_list);
-  let i =0;
   file_list.map(function (file) {
-    localFile = file;
-    // 文件上传
-    formUploader.putFile(uploadToken, localFile.substr(localFile.lastIndexOf('/')+1), localFile, putExtra, function (respErr,
-                                                                                                                     respBody, respInfo) {
-      if (respErr) {
-        throw respErr;
-      }
-      if (respInfo.statusCode == 200) {
-        console.log(++i +"/"+ file_list.length);
-      } else {
-        console.log(respInfo.statusCode);
-        console.log(respBody);
-      }
-    });
+    images(file)
+      .size(960)
+      .save(file, {               //Save the image to a file,whih quality 50
+        quality : 35
+      });
   });
+  execFile('find', ['/Users/Zizy/Downloads/diary/photos'], function (err, stdout, stderr) {
+    var file_list = stdout.split('\n').filter(f => f.substr(f.length - 3) === 'peg');
+    console.log(file_list);
+    let i =0;
+    file_list.map(function (file) {
+      localFile = file;
+      // 文件上传
+      formUploader.putFile(uploadToken, localFile.substr(localFile.lastIndexOf('/')+1), localFile, putExtra, function (respErr,
+                                                                                                                       respBody, respInfo) {
+        if (respErr) {
+          throw respErr;
+        }
+        if (respInfo.statusCode == 200) {
+          console.log(++i +"/"+ file_list.length);
+        } else {
+          console.log(respInfo.statusCode);
+          console.log(respBody);
+        }
+      });
+    });
 
 
+  });
 });
