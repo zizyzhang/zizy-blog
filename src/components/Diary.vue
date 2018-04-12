@@ -9,6 +9,7 @@
       <h1>Zizy's life</h1>
       <div>---每周一更新---</div>
     </div>
+    <div v-if="articles.length===0">加载中，请稍后...</div>
     <div id="diaryList" class="content ">
       <ul class="list-group">
 
@@ -72,12 +73,7 @@
     },
     methods: {
       getArticles: function () {
-        return [{ img_url: 'http://owdi2r4ca.bkt.clouddn.com/d3acab4b1823057a0ab66b5cf3654279.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
-          title: '加载中...\n\n',
-          content: '加载中',
-          date: '2018-04-12T08:06:33Z',
-          id: '045653B2F36B485CABA0AAA7B8C60AFF',
-          place: '345 Des Voeux Road West, Hong Kong' } ]
+        return [ ]
       },
       expand: function (id) {
         $('#' + id).toggleClass('list-group-item-expand')
