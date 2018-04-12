@@ -8,7 +8,8 @@
     "dev": "node build/dev-server.js",
     "start": "node build/dev-server.js",
     "build": "node build/build.js",
-    "upload": "npm run build && git add . && git cmt 'update' && git push origin"
+    "upload": "npm run build && git add . && git cmt 'update' && git push origin",
+    "update": "cd debug && node import-dayone.js && node upload.js && cd .. & npm run build && git add . && git cmt 'update' && git push origin"
   },
   "dependencies": {
     "base64-inline-loader": "^1.1.0",
