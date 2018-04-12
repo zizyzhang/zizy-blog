@@ -52,7 +52,6 @@
     },
     computed: {
       infoMarked() {
-        console.log(this.preMarked)
         return markdown.toHTML(this.preMarked)
       }
     },

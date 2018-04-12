@@ -41,10 +41,18 @@
 <script>
   export default {
     name: 'diary',
+    beforeRouteLeave (to, from, next) {
+      $('#diaryList').infiniteScroll('destroy');
+      console.log('destoryed');      // 可以访问组件实例 `this`
+      next();
+    },
+
     mounted:function(){
       let that = this;
+      Pace.start();
       axios.get('http://api.unclenoway.com:3011/posts/0/10').then(data=>{
         that.articles = data.data;
+        Pace.stop();
       });
 
       let $diaryList = $('#diaryList').infiniteScroll({
@@ -63,6 +71,12 @@
         var data = JSON.parse( response );
         // put that data into template
         that.articles=that.articles.concat(data)
+        Pace.stop();
+
+      });
+      $diaryList.on( 'request.infiniteScroll', function( event, response ) {
+        Pace.start();
+
       });
     },
     data() {
