@@ -48,7 +48,13 @@
     },
     methods: {
       getArticles: function () {
-        return [{ img_url: 'http://owdi2r4ca.bkt.clouddn.com/489a6992a7eaee3a2a4c5d1c9b042dbc.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
+        return [{ img_url: 'http://owdi2r4ca.bkt.clouddn.com/d3acab4b1823057a0ab66b5cf3654279.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
+          title: '平淡但是回归正常的一星期\n\n',
+          content: '\n经历了上个阶段的情绪动荡，\n经历了三天各种打卡咖啡厅的日子。\n最后慢慢才稳定下来日刷dental。\n改了又改AI的作业，网站的cdn域名重新配置，cousera的deep learning课终于看到了尾声。\n没想到深夜的一次深层对话可以让生活有那么大的起伏。\n周二晚上又去了一下海边思考了一下人生。\n想法日新月异，但是又慢慢统一到一个好的路径上。\n翻看自己过去的三万张照片。\n现在的自己，陌生又熟悉。\n',
+          date: '2018-04-12T08:06:33Z',
+          id: '045653B2F36B485CABA0AAA7B8C60AFF',
+          place: '345 Des Voeux Road West, Hong Kong' } ,
+          { img_url: 'http://owdi2r4ca.bkt.clouddn.com/489a6992a7eaee3a2a4c5d1c9b042dbc.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
           title: '深圳半日游深夜思考人生过多的一天\n\n',
           content: '\n一个奇妙的人生转折点。早上考了一个大概最糟糕的考试。然后就吃完饭深圳喝茶电影。晚上回来的时候就顺便海边思考了一下过往人生。由于某些不可描述的原因，讲了很多心里不想说的话，知道了很多悲伤的事实。\n人生还是要继续过，game的作业也要继续写，做不到可以坦然接受。但是无论如何也要继续好好过下去。但也不是什么最糟糕的事情吧。',
           date: '2018-03-20T05:32:45Z',
