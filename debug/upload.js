@@ -28,7 +28,7 @@ execFile('find', ['/Users/Zizy/Downloads/diary/photos'], function (err, stdout, 
     images(file)
       .size(960)
       .save(file, {               //Save the image to a file,whih quality 50
-        quality : 35
+        quality : 50
       });
   });
   execFile('find', ['/Users/Zizy/Downloads/diary/photos'], function (err, stdout, stderr) {
