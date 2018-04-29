@@ -9,16 +9,20 @@ let moment = require('moment')
 // moment().format('MM-DD-YYYY')
 
 var files = fs.readdirSync('/Users/Zizy/Downloads/');
-files.forEach(function (itm, index) {
-  if ((itm.indexOf(moment().format('MM-DD-YYYY')) !== -1) && (itm.indexOf('JSON.zip') !== -1)) {
-    console.log(itm)//名字
-    var execFile = require('child_process').execFile;
-    execFile('unzip', ['-o', '/Users/Zizy/Downloads/' + itm, '-d', '/Users/Zizy/Downloads/diary/'], function (err, stdout, stderr) {
-      console.log({err, stdout, stderr})
-      importDayOne();
-    });
-  }
-});
+execFile('rm',['-rf','/Users/Zizy/Downloads/diary'], function (err, stdout, stderr) {
+  files.forEach(function (itm, index) {
+    if ((itm.indexOf(moment().format('MM-DD-YYYY')) !== -1) && (itm.indexOf('JSON.zip') !== -1)) {
+      console.log(itm)//名字
+      var execFile = require('child_process').execFile;
+      execFile('unzip', ['-o', '/Users/Zizy/Downloads/' + itm, '-d', '/Users/Zizy/Downloads/diary/'], function (err, stdout, stderr) {
+        console.log({err, stdout, stderr})
+        importDayOne();
+      });
+    }
+  });
+})
+
+
 
 
 let importDayOne =function(){
