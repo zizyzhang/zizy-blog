@@ -7,7 +7,7 @@
 
     </div>
     <div class="entry-buttons">
-      <div v-if="window.navigator.userAgent.toLowerCase().match(/MicroMessenger/i) == 'micromessenger'"> <b>不支持在微信中打开此博客，请在浏览器中打开 http://zizy.me。</b> </div>
+      <div style="text-align: center" v-if="window.navigator.userAgent.toLowerCase().match(/MicroMessenger/i) == 'micromessenger'"> <b>不支持在微信中打开此博客，请在浏览器中打开 http://zizy.me。</b> </div>
       <router-link to="/diary" class="btn btn-primary btn-block">Zizy的日记</router-link>
       <router-link to="/about" class="btn btn-success btn-block">关于Zizy</router-link>
 
