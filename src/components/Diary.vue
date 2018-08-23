@@ -24,8 +24,8 @@
                @click="expand(article.id)">
             <div v-if="!!article.img_url" class="img" :class="{'img-expand':isExpand}"
                  :style="{'background-image': 'url(' + article.img_url + ')'}"></div>
-            <div class="title">{{article.title}}</div>
-            <div class="text" :class="{'text-expand':isExpand}">{{article.content}}</div>
+            <div class="title" >{{article.title}}</div>
+            <div class="text" :class="{'text-expand':isExpand}" v-html="article.content"></div>
             <div class="month">{{new Date(article.date).getUTCMonth()+1}}月</div>
             <div class="day">{{new Date(article.date).getUTCDate()}}</div>
           </div>
@@ -51,9 +51,16 @@
       let that = this;
       Pace.start();
       axios.get('http://api.unclenoway.com:3011/posts/0/10').then(data=>{
+        for (let i =0;i<data.data.length;i++) {
+          data.data[i].content=data.data[i].content.replace(/\n/g,'<br>').replace(/^<br>/,'')
+        }
+
+
         that.articles = data.data;
+
         Pace.stop();
       });
+
 
       let $diaryList = $('#diaryList').infiniteScroll({
         // options
@@ -186,7 +193,7 @@
 
   .content .text {
     margin-right: 5rem;
-    height: 3.3rem;
+    height: 3.2rem;
     white-space: normal;
     word-break: break-all;
     text-overflow: ellipsis;
