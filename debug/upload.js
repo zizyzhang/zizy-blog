@@ -21,16 +21,16 @@ var putExtra = new qiniu.form_up.PutExtra();
 var images = require('images');
 
 
-var execFile = require('child_process').execFile;
-execFile('find', ['/Users/Zizy/Downloads/diary/photos'], function (err, stdout, stderr){
-  var file_list = stdout.split('\n').filter(f => f.substr(f.length - 3) === 'peg');
-  file_list.map(function (file) {
-    images(file)
-      .size(960)
-      .save(file, {               //Save the image to a file,whih quality 50
-        quality : 50
+    var execFile = require('child_process').execFile;
+    execFile('find', ['/Users/Zizy/Downloads/diary/photos'], function (err, stdout, stderr){
+      var file_list = stdout.split('\n').filter(f => f.substr(f.length - 3) === 'peg');
+      file_list.map(function (file) {
+        images(file)
+          .size(960)
+          .save(file, {               //Save the image to a file,whih quality 50
+            quality : 50
+          });
       });
-  });
   execFile('find', ['/Users/Zizy/Downloads/diary/photos'], function (err, stdout, stderr) {
     var file_list = stdout.split('\n').filter(f => f.substr(f.length - 3) === 'peg');
     console.log(file_list);
