@@ -24,7 +24,7 @@
                @click="expand(article.id)">
             <div v-if="!!article.img_url" class="img" :class="{'img-expand':isExpand}"
                  :style="{'background-image': 'url(' + article.img_url + ')'}"></div>
-            <div class="title" >{{article.title}}</div>
+            <div class="title" >{{article.title.replace('#','')}}</div>
             <div class="text" :class="{'text-expand':isExpand}" v-html="article.content"></div>
             <div class="month">{{new Date(article.date).getUTCMonth()+1}}月</div>
             <div class="day">{{new Date(article.date).getUTCDate()}}</div>
