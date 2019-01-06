@@ -50,7 +50,7 @@
     mounted:function(){
       let that = this;
       Pace.start();
-      axios.get('http://api.unclenoway.com:3011/posts/0/10').then(data=>{
+      axios.get('http://api.unclenoway.com:8083/posts/0/10').then(data=>{
         for (let i =0;i<data.data.length;i++) {
           data.data[i].content=data.data[i].content.replace(/\n/g,'<br>').replace(/^<br>/,'')
         }
@@ -66,7 +66,7 @@
         // options
         path:function() {
           var pageNumber = ( this.loadCount + 1 ) * 10;
-          return `http://api.unclenoway.com:3011/posts/${pageNumber}/10`;
+          return `http://api.unclenoway.com:8083/posts/${pageNumber}/10`;
         },
         // append: '',
         // load page as text
@@ -112,7 +112,7 @@
 
       },
       getPath:function(skip){
-        return `http://localhost:3011/posts/${skip}/10`
+        return `http://localhost:8083/posts/${skip}/10`
       }
     },
 
