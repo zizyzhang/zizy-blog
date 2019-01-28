@@ -12,14 +12,13 @@
     <div v-if="articles.length===0" class="loading">加载中，请稍后...</div>
     <div id="diaryList" class="content ">
       <ul class="list-group">
-
-        <li
-          v-for="(article, index) of articles">
-          <div class="year"
-               v-if="index === 0 || articles.length>1&& (articles[index-1]&&new Date(articles[index-1].date)).getYear()!==new Date(article.date).getYear()">{{new
-            Date(article.date).getYear()+1900}}年
-          </div>
-          <div :id="article.id" class="list-group-item list-group-item-action"
+        <div v-for="(article, index) of articles">
+          <li class="year" v-if="index === 0 || articles.length>1&& (articles[index-1]&&new Date(articles[index-1].date)).getYear()!==new Date(article.date).getYear()">
+            <div >
+              {{new Date(article.date).getYear()+1900}}年
+            </div>
+          </li>
+          <div :id="article.id" class="list-group-item list-group-item-action diary-list-item"
                :class="{'list-group-item-expand':isExpand}"
                @click="expand(article.id)">
             <div v-if="!!article.img_url" class="img" :class="{'img-expand':isExpand}"
@@ -29,8 +28,8 @@
             <div class="month">{{new Date(article.date).getUTCMonth()+1}}月</div>
             <div class="day">{{new Date(article.date).getUTCDate()}}</div>
           </div>
+        </div>
 
-        </li>
       </ul>
     </div>
   </div>
@@ -120,6 +119,12 @@
 
 </script>
 <style scoped>
+  .year{
+    margin: 0 1.2rem;
+  }
+  .diary-list-item{
+    margin: 0.5rem 0;
+  }
   .container {
     padding: 5px !important;
   }
@@ -147,7 +152,9 @@
     text-align: center;
 
   }
-
+  .content{
+    margin: 0 0.5rem;
+  }
   .content .list-group-item {
     padding: .55rem 0.55rem;
     height: 100px;
