@@ -7,9 +7,9 @@
 
     </div>
     <div class="entry-buttons">
-      <div style="text-align: center" v-if="window.navigator.userAgent.toLowerCase().match(/MicroMessenger/i) == 'micromessenger'"> <b>不支持在微信中打开此博客，请在浏览器中打开 http://zizy.me。</b> </div>
-      <router-link v-if="window.navigator.userAgent.toLowerCase().match(/MicroMessenger/i) != 'micromessenger'" to="/diary" class="btn btn-primary btn-block">Zizy的日记</router-link>
-      <router-link v-if="window.navigator.userAgent.toLowerCase().match(/MicroMessenger/i) != 'micromessenger'" to="/about" class="btn btn-success btn-block">关于Zizy</router-link>
+      <div style="text-align: center" :class="{'hidden':true}"><b>不支持在微信中打开此博客，请在浏览器中打开 http://zizy.me。</b></div>
+      <router-link  to="/diary" class="btn btn-primary btn-block hidden" :style="buttonDisplay">Zizy的日记</router-link>
+      <router-link  to="/about" class="btn btn-success btn-block hidden" :style="buttonDisplay">关于Zizy</router-link>
 
     </div>
   </div>
@@ -20,17 +20,22 @@
 <script>
   export default {
     name: 'hello',
-    data () {
+    data() {
       return {
         msg: 'Welcome to Your Vue.js App',
-        window:window
-      }
+        window: window,
+        inWechat: window.navigator.userAgent.toLowerCase().match(/MicroMessenger/i) !== 'micromessenger',
+        buttonDisplay: {display: 'block!important'}
+      };
     }
   }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .hidden{
+    display: none;
+  }
   .container {
     padding: 5px !important;
   }
