@@ -41,7 +41,7 @@
   }
 
   .avatar {
-    background: url("http://owdi2r4ca.bkt.clouddn.com/avatar.jpg");
+    background: url("http://qiniu-zizyblog.shushubuyue.net/avatar.jpg");
     width: 100px;
     height: 100px;
     background-size: cover;
