@@ -23,7 +23,7 @@
                @click="expand(article.id)">
             <div v-if="!!article.img_url" class="img" :class="{'img-expand':isExpand}"
                  :style="{'background-image': 'url(http://qiniu-zizyblog.shushubuyue.net/' + article.img_url.replace('http://owdi2r4ca.bkt.clouddn.com/','') + ')'}"></div>
-            <div class="title" >{{article.title.replace(/[#*]/g,'')}}</div>
+            <div class="title" v-html="article.title.replace(/[#*]/g,'')"></div>
             <div class="text" :class="{'text-expand':isExpand}" v-html="article.content"></div>
             <div class="month">{{new Date(article.date).getUTCMonth()+1}}月</div>
             <div class="day">{{new Date(article.date).getUTCDate()}}</div>
