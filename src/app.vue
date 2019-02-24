@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="bg-light">
-    <div style="position: absolute;z-index:999" :class="{'hidden':true}"><img src="./assets/inwechat_wb.gif" alt=""></div>
+    <div style="position: absolute;z-index:999;font-size: 3rem" :class="{'hidden':true}">↑↑↑微信中打开，请点上方'原网页'↑↑↑↑</div>
     <nav class="navbar navbar-expand navbar-light bg-light">
       <a class="navbar-brand" href="#">Zizy's Blog</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
