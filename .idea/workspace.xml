@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1f9eacaf-86b2-4b57-90bf-fa4dcc4a93e0" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Diary.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Diary.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/About.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/About.vue" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -22,16 +21,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/Diary.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="36" column="4" selection-start-line="36" selection-start-column="4" selection-end-line="36" selection-end-column="4" />
+            <state relative-caret-position="90">
+              <caret line="6" selection-start-line="3" selection-end-line="6" />
               <folding>
                 <element signature="n#script#0;n#!!top" />
                 <element signature="n#style#0;n#!!top" />
-                <marker date="1559013513703" expanded="false" signature="191:1648" ph="..." />
+                <marker date="1559013514754" expanded="false" signature="191:1648" ph="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/components/About.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="184">
+              <caret line="30" column="40" selection-start-line="30" selection-start-column="40" selection-end-line="30" selection-end-column="40" />
             </state>
           </provider>
         </entry>
@@ -164,12 +172,12 @@
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/debug/upload.js" />
         <option value="$PROJECT_DIR$/server/server.js" />
-        <option value="$PROJECT_DIR$/src/components/About.vue" />
         <option value="$PROJECT_DIR$/docs/CNAME" />
         <option value="$PROJECT_DIR$/src/components/Home.vue" />
         <option value="$PROJECT_DIR$/debug/import-dayone.js" />
         <option value="$PROJECT_DIR$/src/App.vue" />
         <option value="$PROJECT_DIR$/src/components/Diary.vue" />
+        <option value="$PROJECT_DIR$/src/components/About.vue" />
       </list>
     </option>
   </component>
@@ -190,16 +198,6 @@
             <path>
               <item name="zizyblog" type="b2602c69:ProjectViewProjectNode" />
               <item name="zizyblog" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="zizyblog" type="b2602c69:ProjectViewProjectNode" />
-              <item name="zizyblog" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="zizyblog" type="b2602c69:ProjectViewProjectNode" />
-              <item name="zizyblog" type="462c0819:PsiDirectoryNode" />
-              <item name="debug" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="zizyblog" type="b2602c69:ProjectViewProjectNode" />
@@ -226,6 +224,12 @@
               <item name="zizyblog" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="assets" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="zizyblog" type="b2602c69:ProjectViewProjectNode" />
+              <item name="zizyblog" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="zizyblog" type="b2602c69:ProjectViewProjectNode" />
@@ -431,7 +435,7 @@
       <workItem from="1555425378494" duration="590000" />
       <workItem from="1555742480623" duration="596000" />
       <workItem from="1557285180931" duration="571000" />
-      <workItem from="1557291201809" duration="636000" />
+      <workItem from="1557291201809" duration="1411000" />
     </task>
     <task id="LOCAL-00003" summary="update 10.18">
       <created>1508337317784</created>
@@ -444,13 +448,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="313956000" />
+    <option name="totallyTimeSpent" value="314731000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="810" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" order="0" visible="true" weight="0.021141648" />
+      <window_info id="Project" order="0" visible="true" weight="0.16208598" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -463,8 +467,8 @@
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32913166" />
       <window_info anchor="bottom" id="TypeScript" order="7" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.67512333" side_tool="true" visible="true" weight="0.32805756" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.32487667" visible="true" weight="0.32805756" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.3488372" side_tool="true" visible="true" weight="0.15683453" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.6511628" visible="true" weight="0.15683453" />
       <window_info anchor="bottom" id="Version Control" order="11" weight="0.32823366" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -604,13 +608,6 @@
     <entry file="file://$PROJECT_DIR$/static/zizy.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/About.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="369">
-          <caret line="25" column="9" selection-start-line="25" selection-start-column="9" selection-end-line="25" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/docs/CNAME">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -692,13 +689,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Diary.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="36" column="4" selection-start-line="36" selection-start-column="4" selection-end-line="36" selection-end-column="4" />
+        <state relative-caret-position="90">
+          <caret line="6" selection-start-line="3" selection-end-line="6" />
           <folding>
             <element signature="n#script#0;n#!!top" />
             <element signature="n#style#0;n#!!top" />
-            <marker date="1559013513703" expanded="false" signature="191:1648" ph="..." />
+            <marker date="1559013514754" expanded="false" signature="191:1648" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/About.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="30" column="40" selection-start-line="30" selection-start-column="40" selection-end-line="30" selection-end-column="40" />
         </state>
       </provider>
     </entry>
