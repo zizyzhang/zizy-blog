@@ -9,29 +9,32 @@
       <h1>Zizy's life</h1>
       <div>---每周一更新---</div>
     </div>
-    <div v-if="articles.length===0" class="loading">加载中，请稍后...</div>
-    <div id="diaryList" class="content ">
-      <ul class="list-group">
-        <div v-for="(article, index) of articles">
-          <li class="year" v-if="index === 0 || articles.length>1&& (articles[index-1]&&new Date(articles[index-1].date)).getYear()!==new Date(article.date).getYear()">
-            <div >
-              {{new Date(article.date).getYear()+1900}}年
-            </div>
-          </li>
-          <div :id="article.id" class="list-group-item list-group-item-action diary-list-item"
-               :class="{'list-group-item-expand':isExpand}"
-               @click="expand(article.id)">
-            <div v-if="!!article.img_url" class="img" :class="{'img-expand':isExpand}"
-                 :style="{'background-image': 'url(http://qiniu-zizyblog.shushubuyue.net/' + article.img_url.replace('http://owdi2r4ca.bkt.clouddn.com/','') + ')'}"></div>
-            <div class="title" v-html="article.title.replace(/[#*]/g,'')"></div>
-            <div class="text" :class="{'text-expand':isExpand}" v-html="article.content"></div>
-            <div class="month">{{new Date(article.date).getUTCMonth()+1}}月</div>
-            <div class="day">{{new Date(article.date).getUTCDate()}}</div>
-          </div>
-        </div>
+<!--    <div v-if="articles.length===0" class="loading">加载中，请稍后...</div>-->
+<!--    <div id="diaryList" class="content ">-->
+<!--      <ul class="list-group">-->
+<!--        <div v-for="(article, index) of articles">-->
+<!--          <li class="year" v-if="index === 0 || articles.length>1&& (articles[index-1]&&new Date(articles[index-1].date)).getYear()!==new Date(article.date).getYear()">-->
+<!--            <div >-->
+<!--              {{new Date(article.date).getYear()+1900}}年-->
+<!--            </div>-->
+<!--          </li>-->
+<!--          <div :id="article.id" class="list-group-item list-group-item-action diary-list-item"-->
+<!--               :class="{'list-group-item-expand':isExpand}"-->
+<!--               @click="expand(article.id)">-->
+<!--            <div v-if="!!article.img_url" class="img" :class="{'img-expand':isExpand}"-->
+<!--                 :style="{'background-image': 'url(http://qiniu-zizyblog.shushubuyue.net/' + article.img_url.replace('http://owdi2r4ca.bkt.clouddn.com/','') + ')'}"></div>-->
+<!--            <div class="title" v-html="article.title.replace(/[#*]/g,'')"></div>-->
+<!--            <div class="text" :class="{'text-expand':isExpand}" v-html="article.content"></div>-->
+<!--            <div class="month">{{new Date(article.date).getUTCMonth()+1}}月</div>-->
+<!--            <div class="day">{{new Date(article.date).getUTCDate()}}</div>-->
+<!--          </div>-->
+<!--        </div>-->
 
-      </ul>
-    </div>
+<!--      </ul>-->
+<!--    </div>-->
+
+    Temporary Closed
+
   </div>
 
 </template>
