@@ -7,33 +7,37 @@
       <div class="avatar">
       </div>
       <h1>Zizy's life</h1>
-      <div>---每周一更新---</div>
+      <div>---心情好就更新---</div>
     </div>
-<!--    <div v-if="articles.length===0" class="loading">加载中，请稍后...</div>-->
-<!--    <div id="diaryList" class="content ">-->
-<!--      <ul class="list-group">-->
-<!--        <div v-for="(article, index) of articles">-->
-<!--          <li class="year" v-if="index === 0 || articles.length>1&& (articles[index-1]&&new Date(articles[index-1].date)).getYear()!==new Date(article.date).getYear()">-->
-<!--            <div >-->
-<!--              {{new Date(article.date).getYear()+1900}}年-->
-<!--            </div>-->
-<!--          </li>-->
-<!--          <div :id="article.id" class="list-group-item list-group-item-action diary-list-item"-->
-<!--               :class="{'list-group-item-expand':isExpand}"-->
-<!--               @click="expand(article.id)">-->
-<!--            <div v-if="!!article.img_url" class="img" :class="{'img-expand':isExpand}"-->
-<!--                 :style="{'background-image': 'url(http://qiniu-zizyblog.shushubuyue.net/' + article.img_url.replace('http://owdi2r4ca.bkt.clouddn.com/','') + ')'}"></div>-->
-<!--            <div class="title" v-html="article.title.replace(/[#*]/g,'')"></div>-->
-<!--            <div class="text" :class="{'text-expand':isExpand}" v-html="article.content"></div>-->
-<!--            <div class="month">{{new Date(article.date).getUTCMonth()+1}}月</div>-->
-<!--            <div class="day">{{new Date(article.date).getUTCDate()}}</div>-->
-<!--          </div>-->
-<!--        </div>-->
+    <div v-if="articles.length===0" class="loading">加载中，请稍后...</div>
+    <div id="diaryList" class="content ">
+      <ul class="list-group">
+        <div v-for="(article, index) of articles">
+          <li class="year" v-if="index === 0 || articles.length>1&& (articles[index-1]&&new Date(articles[index-1].date)).getYear()!==new Date(article.date).getYear()">
+            <div >
+              {{new Date(article.date).getYear()+1900}}年
+            </div>
+          </li>
+          <div :id="article.id" class="list-group-item list-group-item-action diary-list-item"
+               :class="{'list-group-item-expand':isExpand}"
+               @click="expand(article.id)">
+            <div v-if="!!article.img_url" class="img" :class="{'img-expand':isExpand}"
+                 :style="{'background-image': 'url(http://qiniu-zizyblog.shushubuyue.net/' + article.img_url.replace('http://owdi2r4ca.bkt.clouddn.com/','') + ')'}">
+              <img :src="'http://qiniu-zizyblog.shushubuyue.net/' + article.img_url.replace('http://owdi2r4ca.bkt.clouddn.com/','')" style="width: 100%" alt="">
+            </div>
+            <div class="title" >
+              <div class="" v-html="article.title.replace(/[#*]/g,'')"></div>
+              <a href="javascript:;" class=update-one @click.stop=updateOne(article.id)>更改</a>
+            </div>
+            <div class="text" :class="{'text-expand':isExpand}" v-html="article.content.replace(/\n/g,'<br>').replace(/^<br>/,'')"></div>
+            <div class="month">{{new Date(new Date(article.date)).getMonth()+1}}月</div>
+            <div class="day" @>{{new Date(new Date(article.date) ).getDate()}}</div>
+          </div>
+        </div>
 
-<!--      </ul>-->
-<!--    </div>-->
+      </ul>
+    </div>
 
-    Temporary Closed
 
   </div>
 
@@ -41,6 +45,7 @@
 
 
 <script>
+  import store from 'storejs';
   export default {
     name: 'diary',
     beforeRouteLeave (to, from, next) {
@@ -52,10 +57,10 @@
     mounted:function(){
       let that = this;
       Pace.start();
-      axios.get('http://api.unclenoway.com:8083/posts/0/10').then(data=>{
-        for (let i =0;i<data.data.length;i++) {
-          data.data[i].content=data.data[i].content.replace(/\n/g,'<br>').replace(/^<br>/,'')
-        }
+      axios.get('http://api.unclenowayapi.com:8083/posts/0/10').then(data=>{
+        // for (let i =0;i<data.data.length;i++) {
+        //   data.data[i].content=data.data[i].content.replace(/\n/g,'<br>').replace(/^<br>/,'')
+        // }
 
 
         that.articles = data.data;
@@ -68,7 +73,7 @@
         // options
         path:function() {
           var pageNumber = ( this.loadCount + 1 ) * 10;
-          return `http://api.unclenoway.com:8083/posts/${pageNumber}/10`;
+          return `http://api.unclenowayapi.com:8083/posts/${pageNumber}/10`;
         },
         // append: '',
         // load page as text
@@ -95,6 +100,20 @@
       }
     },
     methods: {
+      updateOne(id){
+        if( (!store.get('admin')) && (prompt()!=='admin')) return;
+        store.set('admin', true);
+        // alert('')
+        let {content, img_url, title,date} = this.articles.find(a => a.id === id);
+        // store.set('content', content);
+        // store.set('imgUrl', img_url);
+        // store.set('title', title);
+        // store.set('date', date);
+        this.$router.push({
+          name:'post',
+          params:{id: id,content,imgUrl:img_url,title,date}
+        })
+      },
       getArticles: function () {
         return [ ]
       },
@@ -104,7 +123,8 @@
         $('#' + id).children('.title').toggleClass('title-expand');
         $('#' + id).children('.img').toggleClass('img-expand');
         if ($('#' + id).children('.img').hasClass('img-expand')) {
-          $('#' + id).children('.img').height($('#' + id).children('.img').width());
+          // $('#' + id).children('.img').height($('#' + id).children('.img').width());
+          $('#' + id).children('.img').height('auto');
           $('#' + id).children('.day,.month').css('padding-top', $('#' + id).children('.img').height());
         } else {
           $('#' + id).children('.img').height('80px');
@@ -121,7 +141,13 @@
   }
 
 </script>
-<style scoped>
+<style>
+  .update-one{
+    opacity: 0.01;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
   .year{
     margin: 0 1.2rem;
   }
@@ -174,13 +200,14 @@
     border-radius: 5px;
     background-size: cover;
     width: 80px;
+    overflow: hidden;
     height: 80px;
 
   }
 
   .content .img-expand {
     float: none;
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
     width: 100%;
     max-width: 350px;

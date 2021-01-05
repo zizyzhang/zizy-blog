@@ -5,12 +5,14 @@
 
 var fs = require("fs");
 var MongoClient = require('mongodb').MongoClient;
-let moment = require('moment')
+let moment = require('moment');
+
+
 // moment().format('MM-DD-YYYY')
 
-var files = fs.readdirSync('/Users/Zizy/Downloads/');
+var files = fs.readdirSync('/Users/zizy/Downloads/');
 var execFile = require('child_process').execFile;
-execFile('rm',['-rf','/Users/Zizy/Downloads/diary'], function (err, stdout, stderr) {
+execFile('rm',['-rf','/Users/zizy/Downloads/diary'], function (err, stdout, stderr) {
   files.forEach(function (itm, index) {
     if ((itm.indexOf(moment().format('MM-DD-YYYY')) !== -1) && (itm.indexOf('JSON.zip') !== -1)) {
       console.log(itm)//名字

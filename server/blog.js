@@ -1,19 +1,24 @@
 var express = require('express');
-var MongoClient = require('mongodb').MongoClient;
+
 
 var dbUrl =
   `mongodb://mezizy:331082Qoot@47.104.58.237:27017/zizyblog?authMechanism=DEFAULT&authSource=admin`;
 var app = express();
+
+var MongoClient = require('mongodb').MongoClient;
+let bodyParser = require('body-parser');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+
 let db = null;
-app.all('*',function (req, res, next) {
+app.all('*', function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
   res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
 
   if (req.method === 'OPTIONS') {
     res.send(200);
-  }
-  else {
+  } else {
     next();
   }
 });
@@ -26,19 +31,45 @@ var server = app.listen(8083, async function () {
 
   let client = await MongoClient
     .connect(dbUrl)
-    .catch(e=>console.log(e));
+    .catch(e => console.log(e));
   db = client.db('zizyblog');
 
   console.log('connect to db');
 
-  await addPosts();
- });
+  // await addPosts();
+});
 
 
+app.post('/posts/post', async function (req, res) {
+  let {title, date, content, img_url} = req.body;
+  await db.collection('posts')
+    .insertOne({title, date, content, img_url, id: Date.now()+''})
+  await res.json({err: false});
 
+})
+
+app.get('/posts/delete', async function (req, res) {
+  let {id} = req.query;
+  await db.collection('posts')
+    .deleteOne({id})
+  await res.json({err: false});
+
+})
+
+app.post('/posts/update', async function (req, res) {
+  let {title, date, content, img_url, id} = req.body;
+  await db.collection('posts')
+    .updateOne({id}, {
+      $set: {
+        title, date, content, img_url,
+      }
+    })
+  await res.json({err: false});
+
+})
 
 app.get('/posts/:skip/:num', async function (req, res) {
-  let docs = await  db.collection('posts')
+  let docs = await db.collection('posts')
     .find({}).sort({date: -1})
     .skip(Number(req.params.skip))
     .limit(Number(req.params.num)).toArray()
@@ -47,155 +78,205 @@ app.get('/posts/:skip/:num', async function (req, res) {
   console.log(docs)
 });
 
-let posts  = (()=>{
-  let posts = [{ img_url: 'http://owdi2r4ca.bkt.clouddn.com/d3acab4b1823057a0ab66b5cf3654279.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
+let posts = (() => {
+  let posts = [{
+    img_url: 'http://owdi2r4ca.bkt.clouddn.com/d3acab4b1823057a0ab66b5cf3654279.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
     title: '平淡但是回归正常的一星期\n\n',
     content: '\n经历了上个阶段的情绪动荡，\n经历了三天各种打卡咖啡厅的日子。\n最后慢慢才稳定下来日刷dental。\n改了又改AI的作业，网站的cdn域名重新配置，cousera的deep learning课终于看到了尾声。\n没想到深夜的一次深层对话可以让生活有那么大的起伏。\n周二晚上又去了一下海边思考了一下人生。\n想法日新月异，但是又慢慢统一到一个好的路径上。\n翻看自己过去的三万张照片。\n现在的自己，陌生又熟悉。\n',
     date: '2018-04-12T08:06:33Z',
     id: '045653B2F36B485CABA0AAA7B8C60AFF',
-    place: '345 Des Voeux Road West, Hong Kong' } ,
-    { img_url: 'http://owdi2r4ca.bkt.clouddn.com/489a6992a7eaee3a2a4c5d1c9b042dbc.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
+    place: '345 Des Voeux Road West, Hong Kong'
+  },
+    {
+      img_url: 'http://owdi2r4ca.bkt.clouddn.com/489a6992a7eaee3a2a4c5d1c9b042dbc.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
       title: '深圳半日游深夜思考人生过多的一天\n\n',
       content: '\n一个奇妙的人生转折点。早上考了一个大概最糟糕的考试。然后就吃完饭深圳喝茶电影。晚上回来的时候就顺便海边思考了一下过往人生。由于某些不可描述的原因，讲了很多心里不想说的话，知道了很多悲伤的事实。\n人生还是要继续过，game的作业也要继续写，做不到可以坦然接受。但是无论如何也要继续好好过下去。但也不是什么最糟糕的事情吧。',
       date: '2018-03-20T05:32:45Z',
       id: 'D55C96C9AFD24EC38213487497BC6115',
-      place: '200–208 Third Street, Hong Kong' },
-    { img_url: 'http://owdi2r4ca.bkt.clouddn.com/ee922ae88e4bd9c3c40f00f6d4057a8c.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
+      place: '200–208 Third Street, Hong Kong'
+    },
+    {
+      img_url: 'http://owdi2r4ca.bkt.clouddn.com/ee922ae88e4bd9c3c40f00f6d4057a8c.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
       title: '多种极端情绪混合的一星期\n\n',
       content: '\n在淘宝买了一个心理咨询。\n然后被弄的心情低落。\n根本就不是什么心理咨询，\n完全就是在调戏我的人生吧……\n还好交了作业后没什么事情。\n可以好好安静思考人生。\n情绪到低谷之后开始反转。\n周四翘了课去深圳默默的思考人生，\n也算是明白了一些什么…\n广州一日游。\n',
       date: '2018-03-27T09:28:59Z',
       id: '74030E464A0C4D7F80C21B19B64207C4',
-      place: 'Yuexiu' },
-    { img_url: 'http://owdi2r4ca.bkt.clouddn.com/dc38cad03c7feeb2ff472af93182669c.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
+      place: 'Yuexiu'
+    },
+    {
+      img_url: 'http://owdi2r4ca.bkt.clouddn.com/dc38cad03c7feeb2ff472af93182669c.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
       title: '更新了最想要生活定义的一星期\n\n',
       content: '\n有一种之前所有想象变成现实的感觉。\ndental学习了几天之后在深圳度过了感觉像是一个世纪的三天。\n虽然是来好好学习的，\n住的loft很精致，\n没怎么玩耍，即便这样还是很充实。\n',
       date: '2018-04-03T18:19:18Z',
       id: '32009FE4CAAA422380262B1E5AAF7200',
-      place: 'The University of Hong Kong' },
-    { img_url: 'http://owdi2r4ca.bkt.clouddn.com/676e45ac1df83e1134f9c5a83dc13d14.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
+      place: 'The University of Hong Kong'
+    },
+    {
+      img_url: 'http://owdi2r4ca.bkt.clouddn.com/676e45ac1df83e1134f9c5a83dc13d14.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
       title: '做游戏以及第二次喝茶邀约的一周\n\n',
       content: '\n总得来说这周从焦虑到慢慢看淡一些虚无的东西。分手之后有一种恢复生活原本模样的感觉。\n前几天沉迷做游戏，对unity慢慢加深理解，似乎真的可以做出来一个什么东西。\n周四的时候开了第一次dissertation会议，有些很厉害的人出现，突然对于自己未来要做的事情有点恐惧。\n叔叔不约处于一个几乎要自己全职投入的状态。学习无法完全的兼顾，只能调低优先级。\n突然觉得应该彻底的把叔叔不约移出中国，但是依然没想好应该怎么做。也不知道所谓彻底到底应该多彻底。\n周五在复习data mining不是很爱这种只为了考试复习的感觉。',
       date: '2018-03-16T17:13:32Z',
       id: '33F6158FF03F4109BA9D1ED7FB7337D6',
-      place: 'Hong Kong Plaza' },
-    { img_url: 'http://owdi2r4ca.bkt.clouddn.com/e39008d88fd2d486bf9e33c7e5c68a96.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
+      place: 'Hong Kong Plaza'
+    },
+    {
+      img_url: 'http://owdi2r4ca.bkt.clouddn.com/e39008d88fd2d486bf9e33c7e5c68a96.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
       title: '复习DM沉迷Linux的一周\n\n',
       content: '\n周五没有存在感的放假，复习了一天的datamining，周六没做什么，周日是对网站的修修改改，新的架构，一切似乎看起来更有道理了一点。',
       date: '2018-03-19T01:26:08Z',
       id: '0FEC207FED1D48D6BBD97631BF7E9150',
-      place: '179 Third Street, Hong Kong' } ,
-    { img_url: 'http://owdi2r4ca.bkt.clouddn.com/9064bf827216643657a2947f4f34b5e5.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
+      place: '179 Third Street, Hong Kong'
+    },
+    {
+      img_url: 'http://owdi2r4ca.bkt.clouddn.com/9064bf827216643657a2947f4f34b5e5.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
       title: '告别多事之冬开始有开心的事情发生的四天\n\n',
       content: '\n心情3.5分。\n百度的排名突然间就回来了。\n虽然加了关键词过滤器营业额下降了30%。嗯，好像也算是一件不怎么开心的事情。不知道以后会不会有什么不好的事情发生，人数会不会继续下降。\n但如果达到某个程度的平衡的话，应该也不至于是什么坏事。\n周六考了ai期中考，在某些特殊原因下可能考得还可以。王老板也通过了我改了又改的论文计划。看起来一切都很正常很安全。\n但是周日晚上就比较特别了，和之前那些妖艳的几天都不一样…\n',
       date: '2018-03-04T04:28:31Z',
       id: 'D9B845D3D79C4752B9B7D9F26EA4348A',
-      place: '494 Queen\'s Road West, Hong Kong' },
-    { img_url: 'http://owdi2r4ca.bkt.clouddn.com/a7ed86e67955505026a26b82f4690239.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
+      place: '494 Queen\'s Road West, Hong Kong'
+    },
+    {
+      img_url: 'http://owdi2r4ca.bkt.clouddn.com/a7ed86e67955505026a26b82f4690239.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
       title: '还算充实的放假三天\n\n',
       content: '\n实际上也没有做什么太多事情，就看着时间一点点流去了。周一因为作息混乱睡了半天，周二认识了一下新朋友，看了电影。周三是etho的咖啡厅写游戏，晚上散步的时候遇见传说中的野猪群。',
       date: '2018-03-06T17:52:16Z',
       id: '1748D28E21BD43F3A96E958B906D97EF',
-      place: '20 Hill Road, Hong Kong' },
-    { img_url: 'http://owdi2r4ca.bkt.clouddn.com/4ff7e0c6edc826ab187a145036decf93.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
+      place: '20 Hill Road, Hong Kong'
+    },
+    {
+      img_url: 'http://owdi2r4ca.bkt.clouddn.com/4ff7e0c6edc826ab187a145036decf93.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
       title: '剩下的一半假期\n\n',
       content: '\n广州二日游，叔叔不约流量一直下滑，然后到一个慢慢看淡随他去的状态。\n收入非常不平衡，可能有上升空间或许没有。\n加了过滤器感觉一切都重新开始了阿。\n贴吧改了规则变得更难顶帖。\n感情很糟糕，工作很糟糕，学习也有点糟糕。',
       date: '2018-03-12T01:45:29Z',
       id: 'B2F71AB394374288BB40608D1D65B2EF',
-      place: '260 Queen\'s Road West, Hong Kong' },{ img_url: 'http://owdi2r4ca.bkt.clouddn.com/3800439b6474adf8c32077df25829f78.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
+      place: '260 Queen\'s Road West, Hong Kong'
+    }, {
+      img_url: 'http://owdi2r4ca.bkt.clouddn.com/3800439b6474adf8c32077df25829f78.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
       title: '感冒不开心的三天\n\n',
       content: '\n心情3分。终于送走母亲觉得一阵释然。找到了新的蜗居地点。\n没有发生什么事情就是好事情。\n网站越来越给人不安心的感觉。\n一定会有越来越多的竞争者，而一步错则步步错。接下来的每一步都要小心谨慎。不然就会出问题。\n已经有太多太多问题了。\n如果掉到谷底，对自己的打击也会是很大很大的吧。\n\n\n',
       date: '2018-02-22T09:09:53Z',
       id: '7DC0FFC844BE4E7891CBD13F962B3F34',
-      place: 'Nanhai Boulevard, Shenzhen' },
-    { img_url: 'http://owdi2r4ca.bkt.clouddn.com/1ef5ce08ba6ecd00f4545e9e7af88851.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
+      place: 'Nanhai Boulevard, Shenzhen'
+    },
+    {
+      img_url: 'http://owdi2r4ca.bkt.clouddn.com/1ef5ce08ba6ecd00f4545e9e7af88851.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
       title: '忙碌也不是特别充实的六天\n\n',
       content: '\n本来以为会生活一切回到正轨。\n但是似乎这逐渐变成了奢望。\n周末在家好像并没有做什么有意义的事情。\n周二的时候再次被徐州的机房欺负，\n干脆把所有的节点放到了海外，\n只留下国内的CDN加速节点。\n这样应该就不再有什么法律风险了吧。\n除了阿里云机房可能还有风险。\n但目前看起来都还一切正常。\n突然有点释然，之后再有什么问题也似乎都慢慢的看淡了。\n不能够再有什么奇怪的事情发生了吧。\n终于有一点点的时间做学校的事情，\n然后就是被导师无限压榨，\n觉得自己顺利毕业变成了一件似乎有点难完成的事情。',
       date: '2018-02-28T12:11:58Z',
       id: '10689FA9B78949459A9D861A749ED4AA',
-      place: undefined },
-    { img_url: 'http://owdi2r4ca.bkt.clouddn.com/de2d2137d4921fabc272e97bd518b135.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
+      place: undefined
+    },
+    {
+      img_url: 'http://owdi2r4ca.bkt.clouddn.com/de2d2137d4921fabc272e97bd518b135.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
       title: '被腾讯也欺负我人生里最无聊的新年的一周\n\n',
       content: '\n心情2.5分。\n放假前两天意外混入一次聚餐。\n在深圳过了新年吃了感觉很不容易才能订到的年夜饭火锅。腾讯屏蔽了叔叔不约，不过考虑到微信一直不是什么传播途径也就稍微不担心一点。\n希望最近已经把坏事都发生完了。\n收入慢慢回到了预估的正常水准。\n虽然一直在一个我还很难一下子接受的范围。也不知道能持续多久以及未来，还有多少小坎坷可能发生。\n一次惊喜的人数增长，但伴随着的也是相同的麻烦。\n新年逛商场逛到想吐。可能是人生中最无聊的新年。\n感觉自己现在最需要的就是一个长长假期，什么麻烦事情都不需要考虑，或者不需要那么经常考虑。\n也许这种加速版的人生也不是什么坏事，很多人可能一生难有这样刺激的心情也说不定。感觉在人群里默默的小骄傲也是一件快乐的事情。\n如果可以希望自己再有勇气一点。\n自己的生活似乎也恰恰是几年前最希望的样子。也许很难把握怎么样是最恰好。至少所谓的麻烦也只是意料之中的一部分。\n除此以外，这个新年真是抖音救了我的命。',
       date: '2018-02-19T05:07:51Z',
       id: '9BDB3D2F359445B09BF2BBFF4160DFBA',
-      place: '26 Russell Street, Hong Kong' },
-    { img_url: 'http://owdi2r4ca.bkt.clouddn.com/98b1bd79ed3660e15923417f13dcf301.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
+      place: '26 Russell Street, Hong Kong'
+    },
+    {
+      img_url: 'http://owdi2r4ca.bkt.clouddn.com/98b1bd79ed3660e15923417f13dcf301.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
       title: '被百度坑，天天打游戏略微颓废的一周\n\n',
       content: '\n心情3分。开始是百度降权，不知道什么时候可以回到首页，或者就永远回不了了……\n看着人数慢慢变少还是有点揪心。略微沉迷平安京，可能还是要开黑才比较有意思。打卡好不容易才看到的毛豆百力滋。\n游戏，DL和kaggle都在有序进行，找到了新的boss。',
       date: '2018-02-11T15:29:09Z',
       id: 'D945EA17B1F348E2A522A1C35B7ECD48',
-      place: '1C–1F Water Street, Hong Kong' },
-    { img_url: 'http://owdi2r4ca.bkt.clouddn.com/e03a5b310aa09d2af9435624656b82a5.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
+      place: '1C–1F Water Street, Hong Kong'
+    },
+    {
+      img_url: 'http://owdi2r4ca.bkt.clouddn.com/e03a5b310aa09d2af9435624656b82a5.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
       title: '上课被公安局查水表的一天\n\n',
       content: '\n心情3分。事情真是接连不断。遭遇查水表也是意想不到。还好一切都还正常。\n最近闲下来只想好好休息买买东西打打游戏。\n无心学习也是可怕。忙碌的生活。之后要好好学习了！',
       date: '2018-01-30T16:22:17Z',
       id: 'F8616B6A8BFA44DA8C6BB7FA16E300AB',
-      place: 'The University of Hong Kong' },
-    { img_url: 'http://owdi2r4ca.bkt.clouddn.com/3938a6a6da3589081d922fba032b27e4.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
+      place: 'The University of Hong Kong'
+    },
+    {
+      img_url: 'http://owdi2r4ca.bkt.clouddn.com/3938a6a6da3589081d922fba032b27e4.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
       title: '逐渐作息恢复正常周末拔牙的一周\n\n',
       content: '\n心情3.5分。逐渐稳定下来的第一周，开始关注让生活提高一些些水准的方法。看了很多年薪**的人是怎么生活的诸如此类，觉得自己更应该多开阔眼界，投资自己总是最好的。每个人还是要有自己的生活方式才对。\n尝试面试招聘，但还是觉得有太多东西没有考虑周全，还不可以轻易行动。把叔叔不约申请了商标，顺利的话应该又排除一些后患。\n尝试了一些新餐厅，有一些还不错。投资了一直想要做的低估值指数。\n周末是深圳拔牙，这种疼痛程度真是好久未经历了…辗转买了暖风机之后，终于不会晚上冻醒。\n总的来说，生活慢慢走向正常轨迹，希望一直没有意外。',
       date: '2018-02-03T16:44:02Z',
       id: '3CB0B5DE24564EF4818944AD1C8BBDEB',
-      place: '179 Third Street, Hong Kong' },
-    { img_url: 'http://owdi2r4ca.bkt.clouddn.com/1ba46e963224a6135e46e020f8ebc97c.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
+      place: '179 Third Street, Hong Kong'
+    },
+    {
+      img_url: 'http://owdi2r4ca.bkt.clouddn.com/1ba46e963224a6135e46e020f8ebc97c.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
       title: '早起上课下午睡觉晚上聚餐的一天\n\n',
       content: '\n心情3分。回到学校的第一次聚餐。\n早起赶回学校上课，ai的课比想象中的偏理论。\n晚上聚餐吃韩料，总觉得还没有那天深圳路边餐厅的正宗一些……\n说不上是开心还是不开心。好像一切回到了正常的轨迹，又似乎哪里有什么不对。说不清…',
       date: '2018-01-19T16:24:02Z',
       id: '744DAD246447416D8C34083376BCAE4F',
-      place: 'The University of Hong Kong' },
-    { img_url: 'http://owdi2r4ca.bkt.clouddn.com/eed59402cc1b2ca400759a6e1f0084db.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
+      place: 'The University of Hong Kong'
+    },
+    {
+      img_url: 'http://owdi2r4ca.bkt.clouddn.com/eed59402cc1b2ca400759a6e1f0084db.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
       title: '逛商场各种买买买约拉面的一天\n\n',
       content: '\n心情3分。\n突然又回到一个人找吃找喝的时光。\n逛商场但是逛的有些疲乏，感觉一眼望去的东西还是类似。\n晚上约拉面还是挺好吃的！',
       date: '2018-01-20T17:30:31Z',
       id: '0DCF2BDD2F5D42F38CD8C8971D209644',
-      place: '363–375 Des Voeux Road West, Hong Kong' },
-    { img_url: 'http://owdi2r4ca.bkt.clouddn.com/ac9e62485d9388cb7b2bfaf7ea292b7e.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
+      place: '363–375 Des Voeux Road West, Hong Kong'
+    },
+    {
+      img_url: 'http://owdi2r4ca.bkt.clouddn.com/ac9e62485d9388cb7b2bfaf7ea292b7e.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
       title: '叔叔不约再次爆炸的一天\n\n',
       content: '\n心情4分。本次爆炸迎来了历史上的第三次人数增加，如果预期没错的话会成长到原来的1.5倍吧。与此同时应该有新的商业模式可以呼之欲出啦。晚上很忙还是要运动一下的！',
       date: '2018-01-21T17:31:27Z',
       id: '2E0DD29F16A64D0AA419F2FA4B084BA7',
-      place: '179 Third Street, Hong Kong' },
-    { img_url: 'http://owdi2r4ca.bkt.clouddn.com/05d4c5548a8d2f0ec2e656049f609d7e.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
+      place: '179 Third Street, Hong Kong'
+    },
+    {
+      img_url: 'http://owdi2r4ca.bkt.clouddn.com/05d4c5548a8d2f0ec2e656049f609d7e.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
       title: '一整天忙叔叔不约觉得真的忙不过来的一天\n\n',
       content: '\n心情4分。人数每次增加总是会有新的idea和新的技术架构。虽然忙但是很开心的感觉。\n人生理想应该在此时短暂的又实现了一些吧。接下来要面对的可能是更激烈的竞争了。谁知道呢。\n果然是一旦开始，就很难再停下来了啊。',
       date: '2018-01-22T17:32:06Z',
       id: '9CF756D7557E4BD38760C021A72242CB',
-      place: '11–19 Whitty Street, Hong Kong' },
-    { img_url: 'http://owdi2r4ca.bkt.clouddn.com/0fdb932e55497f1222ba1d1fef6d5690.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
+      place: '11–19 Whitty Street, Hong Kong'
+    },
+    {
+      img_url: 'http://owdi2r4ca.bkt.clouddn.com/0fdb932e55497f1222ba1d1fef6d5690.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
       title: '漫长作息破坏完全时间从未如此不够用的一周\n\n',
       content: '\n心情4分。其实已经不知道这个心情到底应该是什么。\n恍惚一周过去，网站人数比一年前已经翻了数百倍。盈利也应该会有百倍地提升了吧。如果没有意外的话。\n生活仿佛和之前还没有太大不同。在香港终于可以不在乎食宿的价格，想要什么不用考虑太多就可以买下。但是除此之外烦心的事情也指数倍的增加。似乎除了盈利以外，多了更多的责任，更多要面对的可能随时发生的意外。\n今天突然发现除了新的备案，APP，商标，运营，运维。一堆一堆的。',
       date: '2018-01-30T07:58:39Z',
       id: 'DCC79B5569AF458F823FDB540077FA68',
-      place: '406E Des Voeux Road West, Hong Kong' },{ img_url: 'http://owdi2r4ca.bkt.clouddn.com/393f21e3eacf34861b3b10b0a8555836.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
+      place: '406E Des Voeux Road West, Hong Kong'
+    }, {
+      img_url: 'http://owdi2r4ca.bkt.clouddn.com/393f21e3eacf34861b3b10b0a8555836.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
       title: '咖啡厅学习DL，吃吃喝喝的三天\n\n',
       content: '\n心情3分。最近三天沉迷咖啡厅。\n买了居多有的没的，袜子电动牙刷，新的通勤用耳机。\n网站推广计划有略微的进展。牙刷好评！\nQC30感觉不如35。\nDL终于做完了最后一个作业！\n虽然不知道为什么结果对但是过程错了。',
       date: '2018-01-11T07:32:57Z',
       id: '78787B6C858548D68B69A8AD8B92AF8C',
-      place: 'Ziyang Old Street' },
-    { img_url: 'http://owdi2r4ca.bkt.clouddn.com/a4b5b76f1494fd621a581e863d09fff8.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
+      place: 'Ziyang Old Street'
+    },
+    {
+      img_url: 'http://owdi2r4ca.bkt.clouddn.com/a4b5b76f1494fd621a581e863d09fff8.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
       title: '高中小聚看了电影前任的一天\n\n',
       content: '\n心情3.5分。放假的最后一次聚会，还是开心的。\n看了前任三觉得还是很有代入感，比起电影感觉还是影评比较感人。\n最近的几年里总觉得自己的三观总在经历着天翻地覆，自己都来不及去适应接受所有的改变，让另一个人也需要和你保持同步也许真的是不太可能的事情。',
       date: '2018-01-12T07:38:13Z',
       id: '31C6A90F18F04ACDB9419F8F435D4831',
-      place: 'Baiyun 1st Alley' },
-    { img_url: 'http://owdi2r4ca.bkt.clouddn.com/dea68687f84e040ace1fdf42cfacdc1f.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
+      place: 'Baiyun 1st Alley'
+    },
+    {
+      img_url: 'http://owdi2r4ca.bkt.clouddn.com/dea68687f84e040ace1fdf42cfacdc1f.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
       title: '去宁波赶飞机的一天\n\n',
       content: '\n心情3分。',
       date: '2018-01-13T08:11:24Z',
       id: '4107F6E843C049229310EF19068CBAEA',
-      place: 'Guiyuan Road' },
-    { img_url: 'http://owdi2r4ca.bkt.clouddn.com/db91a9c040e039408703d9916a4a8c47.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
+      place: 'Guiyuan Road'
+    },
+    {
+      img_url: 'http://owdi2r4ca.bkt.clouddn.com/db91a9c040e039408703d9916a4a8c47.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
       title: '三个多小时飞机飞回学校的一天\n\n',
       content: '\n心情3.5分',
       date: '2018-01-14T08:12:31Z',
       id: 'BB0DF48635E9478F9EF63FBC1CAFFE9E',
-      place: 'Guiyuan Road' },
-    { img_url: 'http://owdi2r4ca.bkt.clouddn.com/1ba46e963224a6135e46e020f8ebc97c.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
+      place: 'Guiyuan Road'
+    },
+    {
+      img_url: 'http://owdi2r4ca.bkt.clouddn.com/1ba46e963224a6135e46e020f8ebc97c.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
       title: '早起上课下午睡觉晚上聚餐的一天\n\n',
       content: '\n心情3分。回到学校的第一次聚餐。\n早起赶回学校上课，ai的课比想象中的偏理论。\n晚上聚餐吃韩料，总觉得还没有那天深圳路边餐厅的正宗一些……\n说不上是开心还是不开心。好像一切回到了正常的轨迹，又似乎哪里有什么不对。说不清…',
       date: '2018-01-19T16:24:02Z',
       id: '744DAD246447416D8C34083376BCAE4F',
-      place: 'The University of Hong Kong' },
+      place: 'The University of Hong Kong'
+    },
     {
       img_url: 'http://owdi2r4ca.bkt.clouddn.com/d5cddf64088dd34e43b242a290f31edb.jpeg?imageView2/2/w/400/h/400/interlace/1/q/100',
       title: '日惹景点打卡的一天\n\n',
@@ -1692,20 +1773,20 @@ let posts  = (()=>{
     }];
   return posts;
 })();
-posts.map(post=>{
+posts.map(post => {
   return {
-    img_url:post.post,
-    title:post.title,
-    content:post.content,
-    date:new Date(post.date),
-    id:post.id,
-    place:post.place,
+    img_url: post.post,
+    title: post.title,
+    content: post.content,
+    date: new Date(post.date),
+    id: post.id,
+    place: post.place,
   }
 });
 
-async function addPosts(){
+async function addPosts() {
   let res = await db.collection('posts')
-    .insertMany(posts,{ordered: false})
-    .catch(e=>console.log(e));
+    .insertMany(posts, {ordered: false})
+    .catch(e => console.log(e));
   console.log('import ok');
 }
